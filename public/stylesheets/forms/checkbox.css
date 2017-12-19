@@ -1,0 +1,16 @@
+
+.custom-control-input~.custom-control-indicator {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  text-shadow: none;
+  outline: none;
+  border-radius: 0px;
+}
+
+.custom-control-input:checked~.custom-control-indicator {
+  background: none;
+  outline: none;
+  border: 1px solid #FFFFFF;
+  user-select: none;
+  -webkit-appearance: none;
+}

@@ -1,0 +1,8 @@
+.btn-link,
+.btn-link:active,
+.btn-link:disabled,
+.btn-link:focus,
+.btn-link:hover {
+  text-transform: capitalize;
+  color: #00D8FF;
+}

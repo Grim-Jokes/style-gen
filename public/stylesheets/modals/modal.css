@@ -1,0 +1,27 @@
+.close,
+.close:hover
+{
+  color: #FFFFFF;
+}
+
+.modal-footer,
+.modal-header {
+  border:none;
+}
+
+.modal {
+  width:90%;
+  height:90%;
+}
+
+.modal-dialog {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.modal-content {
+  border-radius: 0;
+}
+
+.fa-times-thin:before {
+  content: '\000d7';
+}
