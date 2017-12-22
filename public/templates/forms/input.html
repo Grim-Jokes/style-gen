@@ -1,36 +1,36 @@
 <form>
-  <div class="form-group row">
+  <div class="form-group">
     <label for="exampleInputEmail">Email</label>
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
-  <div class="form-group row">
+  <div class="form-group">
+    <label for="exampleInputEmail">Disabled attribute</label>
+    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@plum.io" disabled>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail">Diabled class</label>
+    <input type="email" class="form-control disabled" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="example@plum.io">
+  </div>
+  <div class="form-group">
     <label for="exampleInputEmail">Password</label>
     <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter password">
   </div>
-  <div class="form-group row text-center">
-    <div class="col-12">
-      <button class="btn btn-block btn-outline-primary mx-auto">Submit</button>
-    </div>
-    <div class="col-12">
-      <a role="button" class="btn btn-sm btn-link mx-auto">Forgot password?</a>
-    </div>
-  </div>
+  <button class="btn btn-block btn-outline-primary">Submit</button>
+  <a role="button" class="btn btn-sm btn-link btn-block">Forgot password?</a>
 </form>
 
 <form>
-  <div class="form-group row">
+  <div class="form-group">
     <label for="exampleTA">TextArea</label>
     <textarea id="exampleTA" class="form-control"></textarea>
   </div>
-  <div class="form-group row text-center">
-    <div class="col-12">
-      <button class="btn btn-block btn-outline-primary mx-auto">Submit</button>
-    </div>
-  </div>
+<button class="btn btn-block btn-outline-primary">Submit</button>
 </form>
 
 <form>
-  <label class="form-check-label">
-    <input class="form-check-input" type="checkbox"> Remember me
-  </label>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox"> Remember me
+    </label>
+  </div>
 </form>

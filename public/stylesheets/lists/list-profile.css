@@ -1,0 +1,30 @@
+ul.list-profile {
+  display: table;
+  padding: 0  0  0 20px;
+}
+.list-profile li{
+  display: table-row;
+  color: #FFFFFF; 
+  /* set color of list item text */
+
+  list-style: none; 
+}
+
+.list-profile li::before {
+  display: table-cell;
+  color: #4EFF00;  
+  /* color of bullet or square */
+
+  content: "\2022"; 
+  /* Unicode of character to precede the list item */
+
+  font-size: 1.25em; 
+  /* em or %*/
+   margin-left:0;
+   padding-right: .75em; 
+  /* use em*/
+
+  position: relative;
+  top: 0em; 
+  /* use em or % */
+}

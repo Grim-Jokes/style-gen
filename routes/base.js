@@ -33,6 +33,7 @@ function getAllFiles(dir, done) {
 }
 
 function getRoute(id, ids, template) {
+  path.basename(__filename);
   return (req, res, next) => {
     const templates = fs.readdirSync('public/templates/' + id).filter(x => x.endsWith('.html'))
     const styles = fs.readdirSync('public/stylesheets/' + id).filter(x => x.endsWith('.css'));

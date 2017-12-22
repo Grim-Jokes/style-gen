@@ -1,6 +1,7 @@
 IDS = [
   'default',
   'primary-outline',
+  'secondary-outline',
   'success-outline',
   'danger-outline',
   'link-outline'

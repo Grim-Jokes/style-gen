@@ -4,5 +4,5 @@
 .btn-link:focus,
 .btn-link:hover {
   text-transform: capitalize;
-  color: #00D8FF;
+  color: #00D8FF !important;
 }

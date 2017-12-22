@@ -1,19 +1,42 @@
 input.form-control,
+textarea.form-control {
+	color: rgba(255, 255, 255, 1.0) !important;
+  border: 1px solid transparent;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: .2s ease-in-out;
+}
+
 input.form-control:hover,
+textarea.form-control:hover {
+	background-color: rgba(255, 255, 255, 0.3)
+}
+
 input.form-control:active,
-textarea.form-control,
-textarea.form-control:hover,
+input.form-control:focus,
 textarea.form-control:active,
+textarea.form-control:focus {
+	background-color: rgba(241, 211, 255, 0.4);
+	border: 1px solid rgba(174, 0, 255, 0.3);
+	box-shadow: 0 0 7px rgba(174, 0, 255, 0.6);
+	color: rgba(255, 255, 255, 1.0) !important;
+}
+
+
+input.form-control:hover,
+textarea.form-control:hover,
 ::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.65) !important;
 }
 
-input.form-control,
-input.form-control:hover,
-input.form-control:active,
-textarea.form-control,
-textarea.form-control:hover,
-textarea.form-control:active {
-  border: none;
-  background-color: rgba(255, 255, 255, 0.5);
+input.form-control.disabled {
+	background: none;
+	border: 1px solid transparent;
+	padding-left:0;
+	color: rgba(255,255,255,0.75) !important;
+}
+
+input.form-control:disabled{
+	border: 1px solid transparent;
+	background: none;
+	padding-left:0;
 }
