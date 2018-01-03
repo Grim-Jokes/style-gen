@@ -1,15 +1,20 @@
 function getIds() {
-  return document.querySelector('#ids').value.split(',')
+  const ids = document.querySelector('#ids');
+
+  if (!ids) {
+    return [];
+  }
+
+  return ids.value.split(',');
 }
 
 function getFileName() {
   const name = window.location.pathname;
-  let slashIndex  = name.indexOf('/');
+  let slashIndex = name.indexOf('/');
 
   if (slashIndex < 0) {
     slashIndex = 0;
-  }
-  else {
+  } else {
     slashIndex += 1;
   }
 
@@ -31,9 +36,7 @@ function callback() {
 
 
 window.addEventListener('load', () => {
-  const css = document.querySelectorAll('pre code.css')
-
-  css.forEach(elem => {
-    hljs.highlightBlock(elem);
-  });
+  hljs.configure({
+    tabReplace: ' ',
+  })
 })

@@ -1,48 +1,37 @@
-doctype html
-html
-  head
-    <head>
+extends base
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+block append header
+  link(
+    rel="stylesheet" 
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"
+  )
 
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
-      crossorigin="anonymous")
-    script(src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
-      crossorigin="anonymous")
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
-      crossorigin="anonymous")
-    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
-      crossorigin="anonymous")
-
-    link(rel="stylesheet" href="https://use.fontawesome.com/releases/v4.7.0/css/font-awesome-css.min.css"
-      type="text/css"
+  script(
+      src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
     )
 
-    script(src="https://use.fontawesome.com/118cceda66.js")
-
-    link(
-      rel="stylesheet" 
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"
-    )
-
+  block scripts
     script(src="/javascripts/retrieve.js")
     script(src="/javascripts/styleguide.js")
     script(src="/javascripts/xhr.js")
     script(src="/javascripts/entry.js")
 
-    link(rel="stylesheet" type="text/css" href="stylesheets/shared.css")
+  link(rel="stylesheet" type="text/css" href="stylesheets/shared.css")
+  link(rel="stylesheet" type="text/css" href="stylesheets/hljs.css")
 
-    each val in allStyles
+  block styles
+    each val in allStyles || []
       link(rel="stylesheet" type="text/css" href=val)
 
-    block styles
-
-  body
-    a(href="/") All Examples
-    block content
-
-    script(
-      src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
-    )
-
+block content
+  block nav 
+    nav(class="navbar navbar-toggleable-md")
+      ul(class="navbar-nav mr-auto")
+        li(class="nav-item")
+          a(href="/" class="nav-link") All Examples
+        li(class="nav-item")
+          a(href="/new" class="nav-link") New Entry
+        li(class="nav-item")
+          a(href="/folders" class="nav-link") Folders
+    
+  input(type="hidden" id="ids" value=ids)

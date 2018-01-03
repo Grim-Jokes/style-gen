@@ -20,7 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/new', require('./routes/add'));
+app.use('/folders', require('./routes/folders'));
 app.use('/', index);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
