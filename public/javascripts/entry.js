@@ -28,3 +28,12 @@ function callback() {
   const urlPrefix = getFileName();
   new Retriever(ids, urlPrefix).retrieve();
 }
+
+
+window.addEventListener('load', () => {
+  const css = document.querySelectorAll('pre code.css')
+
+  css.forEach(elem => {
+    hljs.highlightBlock(elem);
+  });
+})

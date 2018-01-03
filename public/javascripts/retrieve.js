@@ -8,9 +8,15 @@ class Retriever {
   }
 
   getStyleSuccess(xhr, entryTemplate) {
-    entryTemplate.querySelector('.pre').textContent = xhr.responseText;
+    entryTemplate.querySelector('.css').textContent = xhr.responseText;
 
     document.querySelector('#entries .pd-content').appendChild(entryTemplate);
+
+    const pre = document.querySelectorAll('code.css');
+
+    const code = pre[pre.length - 1]
+
+    hljs.highlightBlock(code);
   }
 
   getTemplateSuccess(xhr, entryTemplate, id) {
