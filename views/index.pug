@@ -1,18 +1,28 @@
-extends content-layout
+extends base
 
-block append content
-  h1= title
+block styles
+  style.
+    .card-title {
+      text-transform: capitalize;
+    }
 
-  ul
-    li
-      a(href="/buttons") Buttons
-    li
-      a(href="/typography") Typography
-    li
-      a(href="/modals") Modals
-    li
-      a(href="/forms") Forms
-    li
-      a(href="/lists") Lists
-    li
-      a(href="/tabs") Tabs
+    h1 {
+      margin-bottom: 1em;
+    }
+block root
+  div(class="container")
+    <h1>Style Guide</h1>
+    div(class="card-columns")
+      each val in templates || []
+        div(class="card")
+          div(class="card-block")
+            a(href=val class="card-link") 
+              h4(class="card-title")= val
+          div(class="card-footer")
+            a(href=val class="card-link") view
+
+      div(class="card")
+        div(class="card-block")
+          h4(class="card-title") new section
+        div(class="card-footer")
+          a(role="button" href="/new" class="card-link") create

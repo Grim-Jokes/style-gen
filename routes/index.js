@@ -9,8 +9,12 @@ var appRouter = require('../app')._router;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+
+  const sections = fs.readdirSync(config.templates).filter(x => path.extname(x) == '')
+
   res.render('index', {
-    title: 'Style Guide'
+    title: 'Style Guide',
+    templates: sections
   });
 });
 
@@ -35,8 +39,8 @@ router.get('/:field', function (req, res, next) {
     .map(x => x.replace(config.stylesheetsPath, 'stylesheets'))
 
   f = fs.readdirSync(pug_p).find(x => {
-      return path.basename(x) === req.params.field + '.pug'
-    });
+    return path.basename(x) === req.params.field + '.pug'
+  });
 
   if (f) {
     res.render(req.params.field, {

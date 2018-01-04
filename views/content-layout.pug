@@ -24,14 +24,9 @@ block append header
       link(rel="stylesheet" type="text/css" href=val)
 
 block content
-  block nav 
-    nav(class="navbar navbar-toggleable-md")
-      ul(class="navbar-nav mr-auto")
-        li(class="nav-item")
-          a(href="/" class="nav-link") All Examples
-        li(class="nav-item")
-          a(href="/new" class="nav-link") New Entry
-        li(class="nav-item")
-          a(href="/folders" class="nav-link") Folders
-    
   input(type="hidden" id="ids" value=ids)
+
+  div(id="entries" class="container")
+    div(class="row pd-content")
+        h1(class="pd-title col-12 text-center")
+

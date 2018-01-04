@@ -1,0 +1,13 @@
+.modal {
+  position:relative;
+  display: block;
+}
+
+.root {
+  margin: 0;
+  padding: 0;
+}
+
+.bg {
+  background: none;
+}

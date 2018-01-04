@@ -1,3 +1,5 @@
+doctype html
+
 html 
   head 
     block header
@@ -19,5 +21,25 @@ html
 
       script(src="https://use.fontawesome.com/118cceda66.js")
 
-    block content
-      a(href="/") Back
+      block styles
+
+block root
+  body
+    div(class="container")
+      ul(class="nav justify-content-center")
+        li(class="nav-item")
+          a(class="nav-link") Text
+        li(class="nav-item")
+          a(class="nav-link") Text
+
+      div(class="row")
+        div(class="col-2")
+          block nav
+            a(href="/") Back
+
+        div(class="col-10")
+          block content
+      
+          
+
+    
