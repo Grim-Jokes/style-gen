@@ -25,6 +25,10 @@ class Retriever {
     filler.innerHTML = xhr.response;
 
     entryTemplate.querySelector('.example > .bg').innerHTML = xhr.response;
+    const code = entryTemplate.querySelector('code.html');
+    code.textContent = xhr.response;
+
+    hljs.highlightBlock(code);
 
     this.request.getTemplate(
       '/stylesheets/' + this.urlPrefix + '/' + id + '.css',

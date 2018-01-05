@@ -10,7 +10,7 @@
 
     .btn:hover {
       opacity: 1;
-      text-shadow: 0 0 25px;
+      text-shadow: 0 0 20px;
     }
 
     .btn:disabled {

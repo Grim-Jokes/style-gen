@@ -16,12 +16,12 @@ block append header
     script(src="/javascripts/xhr.js")
     script(src="/javascripts/entry.js")
 
-  link(rel="stylesheet" type="text/css" href="stylesheets/shared.css")
-  link(rel="stylesheet" type="text/css" href="stylesheets/hljs.css")
+  link(rel="stylesheet" type="text/css" href="/stylesheets/shared.css")
+  link(rel="stylesheet" type="text/css" href="/stylesheets/hljs.css")
 
   block styles
     each val in allStyles || []
-      link(rel="stylesheet" type="text/css" href=val)
+      link(rel="stylesheet" type="text/css" href='/' + val)
 
 block content
   input(type="hidden" id="ids" value=ids)

@@ -18,8 +18,22 @@ router.get('/', function (req, res, next) {
   });
 });
 
-router.post('/:field', function (req, res, next) {
+router.get('/add/:folderName', function (req, res, next) {
+  res.render('add-files')
+});
 
+router.post('/add/:folderName', function (req, res, next) {
+  let stylesheets = path.resolve(config.stylesheetsPath, req.params.folderName, req.body.fileName + '.css');
+  let templates = path.resolve(config.templates, req.params.folderName, req.body.fileName + '.html');
+
+  fs.closeSync(fs.openSync(stylesheets, 'a'));
+  fs.closeSync(fs.openSync(templates, 'a'));
+
+  res.writeHead(302, {
+    location: '/' + req.params.folderName
+  })
+
+  res.end();
 });
 
 router.get('/:field', function (req, res, next) {
@@ -46,11 +60,13 @@ router.get('/:field', function (req, res, next) {
     res.render(req.params.field, {
       ids,
       allStyles,
+      folderName: req.params.field
     })
   } else {
     res.render('content', {
       ids,
-      allStyles
+      allStyles,
+      folderName: req.params.field
     })
   }
 });
