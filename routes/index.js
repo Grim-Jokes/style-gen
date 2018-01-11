@@ -10,7 +10,9 @@ var appRouter = require('../app')._router;
 /* GET home page. */
 router.get('/', function (req, res, next) {
 
-  const sections = fs.readdirSync(config.templates).filter(x => path.extname(x) == '')
+  const sections = fs.readdirSync(config.templates)
+    .filter(x => path.extname(x) == '')
+    .filter(x => !x.startsWith('.'))
 
   res.render('index', {
     title: 'Style Guide',

@@ -1,5 +1,16 @@
-h1 {
-      font-size: 36px;
-      font-weight: 300;
-      line-height: 43.2px;
-    }
+.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+	background-color: transparent !important;
+	text-shadow: 0 0 20px;
+}
+
+.nav-pills .nav-item a {
+	color:rgba(255, 255, 255, 0.7);
+}
+
+.nav-pills .nav-item a:hover {
+	color:rgba(255, 255, 255, 1);
+}
+
+.nav-pills .nav-item a.disabled {
+	color:rgba(255, 255, 255, 0.4);
+}

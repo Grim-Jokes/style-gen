@@ -15,6 +15,7 @@ block append header
     script(src="/javascripts/styleguide.js")
     script(src="/javascripts/xhr.js")
     script(src="/javascripts/entry.js")
+    script(src="/javascripts/bg.js")
 
   link(rel="stylesheet" type="text/css" href="/stylesheets/shared.css")
   link(rel="stylesheet" type="text/css" href="/stylesheets/hljs.css")
@@ -25,6 +26,8 @@ block append header
 
 block content
   input(type="hidden" id="ids" value=ids)
+
+  block buttons
 
   div(id="entries" class="container")
     div(class="row pd-content")
