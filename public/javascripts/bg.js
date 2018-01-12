@@ -1,15 +1,16 @@
 function changeBg(elem) {
   var val = elem.getAttribute('data-value');
-  var d = document.querySelectorAll('.root')
 
-  d.forEach((elem) => {
-    if (elem.classList.contains('bg') ) {
-      elem.classList.remove('bg');
-      elem.classList.add('bg-match-' + val);
-    } else {
-      elem.className = elem.className.replace(/bg-match-(\w+)-dark/g, 'bg-match-' + val)
-    }
+  if (val != 'default-dark') {
+    val = 'bg-match-' + val;
+  } else {
+    val = 'bg-' + val;
+  }
 
-    
-  });
+  var classess = document.body.classList;
+  for(var i = 0; i <  classess.length; i ++) {
+    document.body.classList.toggle(classess[i])
+  }
+
+  document.body.classList.toggle(val);
 }
