@@ -10,11 +10,7 @@ class Retriever {
   getStyleSuccess(xhr, entryTemplate) {
     entryTemplate.querySelector('.css').textContent = xhr.responseText;
 
-    document.querySelector('#entries .pd-content').appendChild(entryTemplate);
-
-    const pre = document.querySelectorAll('code.css');
-
-    const code = pre[pre.length - 1]
+    const code = entryTemplate.querySelector('code.css');
 
     hljs.highlightBlock(code);
   }
@@ -26,13 +22,17 @@ class Retriever {
 
     entryTemplate.querySelector('.example > .bg').innerHTML = xhr.response;
     const code = entryTemplate.querySelector('code.html');
-    code.textContent = xhr.response;
-
-    hljs.highlightBlock(code);
+    const codeText = xhr.response;
+    code.textContent = codeText;
 
     this.request.getTemplate(
       '/stylesheets/' + this.urlPrefix + '/' + id + '.css',
-      (xhr) => this.getStyleSuccess(xhr, entryTemplate)
+      (xhr) => {
+        this.getStyleSuccess(xhr, entryTemplate);
+        document.querySelector('#entries .pd-content').appendChild(entryTemplate);
+        updateModal();
+        hljs.highlightBlock(code);
+      }
     );
   }
 

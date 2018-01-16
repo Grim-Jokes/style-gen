@@ -39,8 +39,13 @@ router.post('/add/:folderName', function (req, res, next) {
 });
 
 router.get('/:field', function (req, res, next) {
+
+  if (req.params.field.endsWith('.ico')) {
+    return res.next();
+  }
+
   const p = path.resolve(config.templates, req.params.field)
-  let f = fs.readdirSync(p).filter(x => !x.startsWith('._'));
+  let f = fs.readdirSync(p).filter( x=> !x.startsWith('.'));
   let ids = f.map(x => {
     return path.basename(x)
       .substring(0, x.length - '.html'.length);
@@ -51,7 +56,8 @@ router.get('/:field', function (req, res, next) {
   const result = glob.sync(config.stylesheetsPath + '/**/*');
 
   ids = ids.join(',');
-  allStyles = result.filter(x => !fs.lstatSync(x).isDirectory())
+  const privateStyles = result.filter(x => !fs.lstatSync(x).isDirectory())
+    .filter(x=> path.basename(x).startsWith('_'))
     .map(x => x.replace(config.stylesheetsPath, 'stylesheets'))
 
   f = fs.readdirSync(pug_p).find(x => {
@@ -61,16 +67,53 @@ router.get('/:field', function (req, res, next) {
   if (f) {
     res.render(req.params.field, {
       ids,
-      allStyles,
+      privateStyles,
       folderName: req.params.field
     })
   } else {
     res.render('content', {
       ids,
-      allStyles,
+      privateStyles,
       folderName: req.params.field
     })
   }
+});
+
+router.get('/style/combined.css', function (req, res, next) {
+  var paths = glob.sync(config.stylesheetsPath + '**/*').filter( x => !x.endsWith('.css'));
+
+  var result = {}
+
+  paths.forEach((dirname) => {
+    fs.readdirSync(dirname).filter(x => {
+      return !x.startsWith('_') && !x.startsWith('.')
+      }).forEach((fileName) => {
+      var fullPath = path.resolve(dirname, fileName);
+      result[fullPath] = fs.readFileSync(fullPath);
+    });
+  });
+
+  file = ''
+
+  Object.keys(result).forEach((filePath, index) => {
+    var header = "/*"  + filePath + "*/\n\n";
+    
+    if (index != 0) {
+      header = '\n\n' + header;
+    }
+
+    file += header
+
+    file += result[filePath];
+  });
+
+  res.writeHead(200, {
+    "Content-Type": "text/css",
+    "Content-Length": file.length
+    }
+  );
+  res.write(file);
+  res.end();
 });
 
 module.exports = router;

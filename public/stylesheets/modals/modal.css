@@ -9,19 +9,13 @@
   border:none;
 }
 
-.modal {
-  width:90%;
-  height:90%;
-}
-
 .modal-dialog {
   border: 1px solid rgba(255, 255, 255, 0.6);
+  width:90%;
+  height: 90%;
 }
 
 .modal-content {
   border-radius: 0;
-}
-
-.fa-times-thin:before {
-  content: '\000d7';
+  background-color: #293040;
 }

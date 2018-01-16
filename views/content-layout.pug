@@ -1,6 +1,8 @@
 extends base
 
 block append header
+  link(rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon")
+
   link(
     rel="stylesheet" 
     href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"
@@ -18,13 +20,16 @@ block append header
     script(src="/javascripts/bg.js")
     script(src="/javascripts/edit.js")
     script(src="/javascripts/fontawesome-all.min.js")
+    script(src="/javascripts/modal.js")
 
   link(rel="stylesheet" type="text/css" href="/stylesheets/shared.css")
   link(rel="stylesheet" type="text/css" href="/stylesheets/hljs.css")
 
   block styles
-    each val in allStyles || []
-      link(rel="stylesheet" type="text/css" href='/' + val)
+    each style in privateStyles
+      link(rel="stylesheet" type="text/css" href=style)
+
+    link(rel="stylesheet" type="text/css" href='/style/combined.css')
 
 block content
   input(type="hidden" id="ids" value=ids)

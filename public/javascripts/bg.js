@@ -1,3 +1,8 @@
+window.addEventListener('load', () => {
+  localStorage.setItem('bodyClass', 'bg-default-dark');
+})
+
+
 function changeBg(elem) {
   var val = elem.getAttribute('data-value');
 
@@ -7,10 +12,8 @@ function changeBg(elem) {
     val = 'bg-' + val;
   }
 
-  var classess = document.body.classList;
-  for(var i = 0; i <  classess.length; i ++) {
-    document.body.classList.toggle(classess[i])
-  }
+  document.body.className = localStorage.getItem('bodyClass') || '';
+  document.body.className = val;
 
-  document.body.classList.toggle(val);
+  updateModal();
 }

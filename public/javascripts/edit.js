@@ -12,7 +12,7 @@ function editCss(a) {
 
     pre.classList.add("d-none");
     textArea.classList.remove('d-none');
-    textArea.value = pre.textContent;
+    textArea.value = pre.textContent.trim();
 
   } else {
     a.textContent = "Edit"
