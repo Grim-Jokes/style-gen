@@ -36,17 +36,48 @@ class Retriever {
     );
   }
 
+  createNav(id) {
+    const a = document.createElement('a');
+
+    const li = document.createElement('li');
+    li.classList.add('nav-item');
+    li.appendChild(a);
+
+    a.href = '#' + id;
+    a.className = 'btn btn-sm btn-link';
+    a.textContent = id.replace(/-/g, ' ');
+
+    return li;
+  }
+
   retrieve() {
-    this.ids.forEach((id) => {
+    this.ids.forEach((id, index) => {
       id = id.trim().replace(/' '/g, '%20');
       if (!id) {
         return;
       }
 
+      const last = index == this.ids.length - 1;
+
       const entryTemplate = document.importNode(ENTRY_TEMPLATE.content, true);
       this.request.getTemplate(
         '/templates/' + this.urlPrefix + '/' + id + '.html',
-        (xhr) => this.getTemplateSuccess(xhr, entryTemplate, id)
+        (xhr) => {
+          this.getTemplateSuccess(xhr, entryTemplate, id);
+          const h3 = entryTemplate.querySelector('h3');
+
+          h3.id = id;
+          h3.textContent = id;
+          h3.classList.add('example-header')
+
+          const sideNav = document.querySelector('.side-nav');
+
+          sideNav.appendChild(this.createNav(id));
+
+          if (last) {
+            sideNav.appendChild(this.createNav('top'));
+          }
+        }
       );
     });
   }

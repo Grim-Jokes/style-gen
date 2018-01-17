@@ -40,3 +40,11 @@ block content
     div(class="row pd-content")
         h1(class="pd-title col-12 text-center")
 
+
+block append nav 
+  each template in templates
+    li(class="nav-item")
+      a(
+        class="btn btn-sm btn-link"
+        href="/" + template
+      ) #{template}

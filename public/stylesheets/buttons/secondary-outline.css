@@ -3,7 +3,6 @@
 .btn-outline-secondary:disabled,
 .btn-outline-secondary:focus,
 .btn-outline-secondary:hover  {
-  background:none;
   color: #00BAFF;
   border-color: rgba(0, 186, 255, 1); 
 }

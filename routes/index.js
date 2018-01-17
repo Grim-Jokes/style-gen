@@ -38,56 +38,68 @@ router.post('/add/:folderName', function (req, res, next) {
   res.end();
 });
 
+function isDirectory(source) {
+  return fs.lstatSync(source.path).isDirectory();
+}
+
+function isFile(source) {
+  return fs.lstatSync(source.path).isFile();
+}
+
+function readDir(source) {
+  return fs.readdirSync(source).map(name => {
+    return {
+      path: path.join(source, name),
+      name
+    }
+  });
+}
+
+function getDirectories(source) {
+  return readDir(source).filter(isDirectory);
+}
+
+function getFiles(source) {
+  return readDir(source).filter(isFile);
+}
+
 router.get('/:field', function (req, res, next) {
 
   if (req.params.field.endsWith('.ico')) {
     return res.next();
   }
 
-  const p = path.resolve(config.templates, req.params.field)
-  let f = fs.readdirSync(p).filter( x=> !x.startsWith('.'));
-  let ids = f.map(x => {
-    return path.basename(x)
-      .substring(0, x.length - '.html'.length);
-  });
+  var fieldPath = path.resolve(config.templates, req.params.field);
 
-  const pug_p = path.resolve(__dirname, '../views/');
+  let ids = getFiles(fieldPath).filter(x=>!x.name.startsWith('_') && !x.name.startsWith('.'))
+  ids = ids.map(x=> x.name.replace('.html', '')).join(',');
 
+  var templates = getDirectories(config.templates).map(x => x.name);
+  
   const result = glob.sync(config.stylesheetsPath + '/**/*');
 
-  ids = ids.join(',');
+
   const privateStyles = result.filter(x => !fs.lstatSync(x).isDirectory())
-    .filter(x=> path.basename(x).startsWith('_'))
+    .filter(x => path.basename(x).startsWith('_'))
     .map(x => x.replace(config.stylesheetsPath, 'stylesheets'))
 
-  f = fs.readdirSync(pug_p).find(x => {
-    return path.basename(x) === req.params.field + '.pug'
-  });
-
-  if (f) {
-    res.render(req.params.field, {
-      ids,
-      privateStyles,
-      folderName: req.params.field
-    })
-  } else {
-    res.render('content', {
-      ids,
-      privateStyles,
-      folderName: req.params.field
-    })
-  }
+  res.render('content', {
+    ids,
+    templates,
+    privateStyles,
+    folderName: req.params.field
+  })
 });
 
 router.get('/style/combined.css', function (req, res, next) {
-  var paths = glob.sync(config.stylesheetsPath + '**/*').filter( x => !x.endsWith('.css'));
+  var paths = glob.sync(config.stylesheetsPath + '**/*').filter(x => !x.endsWith('.css'));
 
   var result = {}
 
   paths.forEach((dirname) => {
     fs.readdirSync(dirname).filter(x => {
       return !x.startsWith('_') && !x.startsWith('.')
-      }).forEach((fileName) => {
+    }).forEach((fileName) => {
       var fullPath = path.resolve(dirname, fileName);
       result[fullPath] = fs.readFileSync(fullPath);
     });
@@ -96,8 +108,8 @@ router.get('/style/combined.css', function (req, res, next) {
   file = ''
 
   Object.keys(result).forEach((filePath, index) => {
-    var header = "/*"  + filePath + "*/\n\n";
-    
+    var header = "/*" + filePath + "*/\n\n";
+
     if (index != 0) {
       header = '\n\n' + header;
     }
@@ -110,8 +122,7 @@ router.get('/style/combined.css', function (req, res, next) {
   res.writeHead(200, {
     "Content-Type": "text/css",
     "Content-Length": file.length
-    }
-  );
+  });
   res.write(file);
   res.end();
 });

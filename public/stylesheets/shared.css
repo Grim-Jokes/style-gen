@@ -109,3 +109,8 @@ code.hljs:hover {
   font-size: 2em;
   font-weight: bold;
 }
+
+.example-header {
+  color: white;
+  text-transform: uppercase;
+}
