@@ -24,19 +24,13 @@ router.post('/', function(req, res, next) {
   const newPath =  path.resolve(config.stylesheetsPath, req.body.sectionName);
   const newTemplatePatth = path.resolve(config.templates, req.body.sectionName);
 
-  if (fs.existsSync(newPath)) {
-    return res.render('add', {
-      error: "Stylesheet entry already exists!"
-    });
+  if (!fs.existsSync(newPath)) {
+    fs.mkdirSync(newPath);
   }
-  else if (fs.existsSync(newTemplatePatth)) {
-    return res.render('add', {
-      error: "Template entry already exists!"
-    });
+  
+  if (!fs.existsSync(newTemplatePatth)) {
+    fs.mkdirSync(newTemplatePatth);
   }
-
-  fs.mkdirSync(newPath);
-  fs.mkdirSync(newTemplatePatth);
 
   res.render('add', {});
 });

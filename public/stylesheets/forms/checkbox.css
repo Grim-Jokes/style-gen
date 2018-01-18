@@ -1,16 +1,11 @@
-
-.custom-control-input~.custom-control-indicator {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  text-shadow: none;
-  outline: none;
-  border-radius: 0px;
+input[type=checkbox] { display:none; } 
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
 }
 
-.custom-control-input:checked~.custom-control-indicator {
-  background: transparent;
-  outline: none;
-  border: 1px solid #FFFFFF;
-  user-select: none;
-  -webkit-appearance: none;
-}
+input[type=checkbox] + label:before { content: "\f0c8"; } 
+input[type=checkbox] + label:before { letter-spacing: 10px; } 
+
+input[type=checkbox]:checked + label:before { content: "\f14a"; } 
+input[type=checkbox]:checked + label:before { letter-spacing: 5px; }
