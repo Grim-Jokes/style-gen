@@ -113,4 +113,7 @@ code.hljs:hover {
 .example-header {
   color: white;
   text-transform: uppercase;
+  padding-bottom: 1em;
+  border-bottom: 1px solid white;
 }
+

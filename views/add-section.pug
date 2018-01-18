@@ -1,0 +1,12 @@
+extends base
+
+block append content
+    form(method='POST' class="container")
+      div(class="form-group row")
+        label(for="fileName") Setion Name
+        input(type="text" name="sectionName" class="form-control" id="sectionName" placeholder="Section Name")
+      if error
+        div(class="form-group row has-danger")
+          span(class="form-control-feedback")= error
+      div(class="form-group row")
+        input(type="submit" class="btn btn-primary")

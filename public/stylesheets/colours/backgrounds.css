@@ -1,0 +1,31 @@
+.bg-success {
+  background-color: #00AE62 !important;
+}
+
+.bg-primary {
+  background-color: #FFFFFF !important;
+}
+
+.bg-danger {
+ background-color: #FF0062 !important; 
+}
+
+.bg-critical {
+  background-color: #EE2A7B !important;
+}
+
+.bg-essential {
+  background-color: #FBB040 !important;
+}
+
+.bg-important {
+  background-color: #2BB673 !important;
+}
+
+.bg-helpful {
+  background-color: #27AAE1 !important;
+}
+
+.bg-useful {
+  background-color: #1B75BC !important;
+}

@@ -20,8 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/new', require('./routes/add'));
 app.use('/folders', require('./routes/folders'));
+app.use('/style', require('./routes/style'));
+app.use('/new/section', require('./routes/addSection'));
+app.use('/', require('./routes/addFile'));
 app.use('/', index);
 
 

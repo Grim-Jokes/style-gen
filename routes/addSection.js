@@ -9,20 +9,21 @@ var appRouter = require('../app')._router;
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('add', {
+  res.render('add-section', {
     title: 'Add new section'
   });
 });
 
 router.post('/', function(req, res, next) {
-
   if (!req.body.sectionName)
-    return res.render('add', {
+    return res.render('add-section', {
       error: "Section name is empty"
     });
 
-  const newPath =  path.resolve(config.stylesheetsPath, req.body.sectionName);
-  const newTemplatePatth = path.resolve(config.templates, req.body.sectionName);
+  const sectionName = req.body.sectionName.toLowerCase();
+
+  const newPath =  path.resolve(config.stylesheetsPath, sectionName);
+  const newTemplatePatth = path.resolve(config.templates, sectionName);
 
   if (!fs.existsSync(newPath)) {
     fs.mkdirSync(newPath);
@@ -32,7 +33,7 @@ router.post('/', function(req, res, next) {
     fs.mkdirSync(newTemplatePatth);
   }
 
-  res.render('add', {});
+  res.render('add-section', {});
 });
 
 module.exports = router;

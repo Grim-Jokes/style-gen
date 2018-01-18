@@ -1,0 +1,31 @@
+.text-danger {
+	color: #FF0062 !important;
+}
+
+.text-success {
+	color: #00AE62 !important;
+}
+
+.text-green {
+  color: #4eff00;
+}
+
+.text-critical {
+	color: #EE2A7B !important;
+}
+
+.text-essential {
+	color: #FBB040 !important;
+}
+
+.text-important {
+  color: #2BB673 !important;
+}
+
+.text-helpful {
+	color: #27AAE1 !important;
+}
+
+.text-useful {
+	color: #1B75BC !important;
+}
