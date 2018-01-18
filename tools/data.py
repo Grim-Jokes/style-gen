@@ -142,3 +142,25 @@ def _init_dispatches():
 _init_macros()
 _init_token_regexp()
 _init_dispatches()
+
+def _unicode_replace(match, int=int, unichr=chr, maxunicode=sys.maxunicode):
+    codepoint = int(match.group(1), 16)
+    if codepoint <= maxunicode:
+        return unichr(codepoint)
+    else:
+        return '\N{REPLACEMENT CHARACTER}'  # U+FFFD
+
+UNICODE_UNESCAPE = functools.partial(
+    re.compile(COMPILED_MACROS['unicode'], re.I).sub,
+    _unicode_replace)
+
+NEWLINE_UNESCAPE = functools.partial(
+    re.compile(r'()\\' + COMPILED_MACROS['nl']).sub,
+    '')
+
+SIMPLE_UNESCAPE = functools.partial(
+    re.compile(r'\\(%s)' % COMPILED_MACROS['simple_escape'], re.I).sub,
+    # Same as r'\1', but faster on CPython
+    operator.methodcaller('group', 1))
+
+FIND_NEWLINES = re.compile(COMPILED_MACROS['nl']).finditer
