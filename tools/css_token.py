@@ -6,3 +6,6 @@ class Token:
     self.unit = unit
     self.line = line
     self.column = column
+
+  def __str__(self):
+    return f"{self.value}{',' +  self.unit if self.unit else self.unit}, {self.type}, {self.line}:{self.column}"

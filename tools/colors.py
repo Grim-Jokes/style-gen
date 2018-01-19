@@ -64,10 +64,11 @@ handle_type = {
   TYPES.STRING: handle_string,
   TYPES.BAD_STRING: noop,
   TYPES.PERCENTAGE: handle_percentage,
-  ']': noop
+  DELIM_CHARS: noop
 }
 
 def scan_file(content):
+    tokens = []
     pos = 0
     column = 0
     line = 1
@@ -78,10 +79,8 @@ def scan_file(content):
     while pos < source_len:
       char = content[pos]
       if char in DELIM_CHARS:
-        type_ = char
+        type_ = DELIM_CHARS
         css_value = char
-        pos += 1
-        continue
       else:
         codepoint = min(ord(char), 160)
         for _index, type_, regexp in TOKEN_DISPATCH[codepoint]:
@@ -89,9 +88,9 @@ def scan_file(content):
           if match:
             css_value = match.group()
             break
-          else:
-            type_ = TYPES.DELIM
-            css_value = char
+        else:
+          type_ = TYPES.DELIM
+          css_value = char
       
       length = len(css_value)
       next_pos = pos + length
@@ -106,7 +105,7 @@ def scan_file(content):
         params['line'] = line
         params['column'] = column
 
-        css_token.Token(**params)
+        tokens.append(css_token.Token(**params))
 
       pos = next_pos
       newlines = list(FIND_NEWLINES(css_value))
@@ -116,15 +115,17 @@ def scan_file(content):
       else:
         column += length
 
-    return []
+    return tokens
 
-colors = []
-for file in glob.glob('/home/vagrant/plum/public/stylesheets/**/*.css'):
+tokens = []
+for file in glob.glob('/home/vagrant/style-gen/public/stylesheets/**/*.css'):
 
     if path.basename(file).startswith('_'):
         continue
 
     with open(file) as f:
-        colors.extend(scan_file(f.read()))
+        tokens.extend(scan_file(f.read()))
 
-[print(x.value) for x in colors]
+import parser
+p = parser.Parser(tokens)
+p.find_colours()

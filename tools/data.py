@@ -67,10 +67,9 @@ COMPILED_TOKEN_INDEXES = {}  # {name: i}  helper for the C speedups
 TOKEN_DISPATCH = []
 
 class Types:
-  
   DELIM = ''
   COMMA = ','
-  
+
   def __new__(cls):
     for line in TOKENS.splitlines():
       if line.strip():
