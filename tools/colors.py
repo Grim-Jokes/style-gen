@@ -30,11 +30,6 @@ def noop(*args):
 def handle_space(match, css_value):
   pass
 
-def handle_function(match, css_value):
-  return {
-    'value': match.group(0)
-  }
-
 def handle_percentage(match, css_value):
   return {
     'value': css_value[:-1], 
@@ -48,8 +43,24 @@ def handle_string(match, css_value):
   value = UNICODE_UNESCAPE(value)
 
   return {
-  'value': value
-}
+    'value': value
+  }
+
+def handle_number(match, css_value):
+  value = css_value
+  if '.' in value:
+    value = float(value)
+  else:
+    value = int(value)
+
+  return {
+    'value': value
+  }
+
+def handle_comment(matc, css_value):
+  return {
+    'value': css_value
+  }
 
 handle_type = {
   TYPES.IDENT:  handle_ident,
@@ -57,9 +68,10 @@ handle_type = {
   TYPES.DELIM: noop,
   TYPES.S: handle_space,
   TYPES.FUNCTION: handle_ident,
-  TYPES.NUMBER: handle_function,
-  TYPES.HASH: handle_function,
-  TYPES.COMMENT: handle_function,
+  TYPES.ATKEYWORD: handle_ident,
+  TYPES.NUMBER: handle_number,
+  TYPES.HASH: handle_ident,
+  TYPES.COMMENT: handle_comment,
   TYPES.COMMA: noop,
   TYPES.STRING: handle_string,
   TYPES.BAD_STRING: noop,
@@ -67,7 +79,7 @@ handle_type = {
   DELIM_CHARS: noop
 }
 
-def scan_file(content):
+def scan_file(fileName, content):
     tokens = []
     pos = 0
     column = 0
@@ -105,6 +117,8 @@ def scan_file(content):
         params['line'] = line
         params['column'] = column
 
+        params['fileName'] = fileName
+
         tokens.append(css_token.Token(**params))
 
       pos = next_pos
@@ -118,13 +132,13 @@ def scan_file(content):
     return tokens
 
 tokens = []
-for file in glob.glob('/home/vagrant/style-gen/public/stylesheets/**/*.css'):
+for file in glob.glob('/home/vagrant/plum/public/stylesheets/**/*.css'):
 
     if path.basename(file).startswith('_'):
         continue
 
     with open(file) as f:
-        tokens.extend(scan_file(f.read()))
+        tokens.extend(scan_file(file, f.read()))
 
 import parser
 p = parser.Parser(tokens)

@@ -1,0 +1,13 @@
+body-bg {
+  display: inline-block;
+  width: 30%;
+  padding: 20% 0 20% 0;
+  margin-top: 1%;
+  border-radius: 8px;
+  background-attachment: unset !important;
+}
+
+body-bg-container {
+  display: block;
+  padding: 10% 5%;
+}

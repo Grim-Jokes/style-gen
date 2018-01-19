@@ -15,17 +15,44 @@ html
       script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
         crossorigin="anonymous")
 
-     
       block styles
+
+      link(rel="stylesheet" type="text/css" href="/stylesheets/shared.css")
+      link(rel="stylesheet" type="text/css" href="/stylesheets/cards.css")
+      link(rel="stylesheet" type="text/css" href="/stylesheets/hljs.css")
 
 block root
   body(class="bg-default-dark")
+    div(class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3")
+      nav(class="nav mr-3")
+        a(href="/" class="btn btn-sm btn-outline-primary") Main Menu
+    
+      select(
+        class="custom-select"
+        onChange="changeBg(this)")
+        option(
+          value="default-dark"
+        ) Default BG
+        option(
+          value="critical-dark"
+        ) Critical BG
+        option(
+          value="essential-dark"
+        ) Essential BG
+        option(
+          value="important-dark"
+        ) Important BG
+        option(
+          value="helpful-dark"
+        ) Helpful BG
+        option(
+          value="useful-dark"
+        ) Useful BG
     div(class="container-fluid")
       div(class="row")
         div(class="col-2")
           ul(class="nav flex-column sticky-top")
-            li(class="nav-item")
-              a(href="/" class="btn btn-sm btn-link") Back
+                          
             block nav
 
         div(class="col-8")

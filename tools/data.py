@@ -3,33 +3,7 @@ import operator
 import re
 import string
 import sys
-
-MACROS = r'''
-    nl	\n|\r\n|\r|\f
-    w	[ \t\r\n\f]*
-    nonascii	[^\0-\237]
-    unicode	\\([0-9a-f]{{1,6}})(\r\n|[ \n\r\t\f])?
-    simple_escape	[^\n\r\f0-9a-f]
-    escape	{unicode}|\\{simple_escape}
-    nmstart	[_a-z]|{nonascii}|{escape}re.
-    nmchar	[_a-z0-9-]|{nonascii}|{escape}
-    name	{nmchar}+
-    ident	[-]?{nmstart}{nmchar}*
-    num	[-+]?(?:[0-9]*\.[0-9]+|[0-9]+)
-    string1	\"([^\n\r\f\\"]|\\{nl}|{escape})*\"
-    string2	\'([^\n\r\f\\']|\\{nl}|{escape})*\'
-    string	{string1}|{string2}
-    badstring1	\"([^\n\r\f\\"]|\\{nl}|{escape})*\\?
-    badstring2	\'([^\n\r\f\\']|\\{nl}|{escape})*\\?
-    badstring	{badstring1}|{badstring2}
-    badcomment1	\/\*[^*]*\*+([^/*][^*]*\*+)*
-    badcomment2	\/\*[^*]*(\*+[^/*][^*]*)*
-    badcomment	{badcomment1}|{badcomment2}
-    baduri1	url\({w}([!#$%&*-~]|{nonascii}|{escape})*{w}
-    baduri2	url\({w}{string}{w}
-    baduri3	url\({w}{badstring}
-    baduri	{baduri1}|{baduri2}|{baduri3}
-'''.replace(r'\0', '\0').replace(r'\237', '\237');
+import macro
 
 TOKENS = r'''
     S	[ \t\r\n\f]+
@@ -59,8 +33,6 @@ TOKENS = r'''
     CDC	-->
 '''
 
-COMPILED_MACROS = {}
-
 COMPILED_TOKEN_REGEXPS = []  # [(name, regexp.match)]  ordered
 COMPILED_TOKEN_INDEXES = {}  # {name: i}  helper for the C speedups
 
@@ -79,22 +51,12 @@ class Types:
 
 TYPES = Types()
 
-def _init_macros():
-  COMPILED_MACROS.clear()
-  for line in MACROS.splitlines():
-      line = line.strip()
-      if line:
-        name, value = line.split('\t')
-        COMPILED_MACROS[name.strip()] = '(?:%s)' \
-            % value.format(**COMPILED_MACROS)
-
-
 def _init_token_regexp():
   for line in TOKENS.splitlines():
       if line.strip():
         for name, value in [line.split('\t')]:
           compiled_re = re.compile(
-            value.format(**COMPILED_MACROS),
+            value.format(**macro.COMPILED_MACROS),
             re.I
           )
 
@@ -109,9 +71,8 @@ def _init_token_regexp():
   for i, (name, regexp) in enumerate(COMPILED_TOKEN_REGEXPS):
     COMPILED_TOKEN_INDEXES[name] = i
 
-def _init_dispatches():
-    dispatch = [[] for i in range(161)]
-    for chars, names in [
+
+DISPATCH_STRS = [
         (' \t\r\n\f', ['S']),
         ('uU', ['URI', 'BAD_URI', 'UNICODE-RANGE']),
         # \ is an escape outside of another token
@@ -123,7 +84,11 @@ def _init_dispatches():
         ('/', ['COMMENT', 'BAD_COMMENT']),
         ('<', ['CDO']),
         ('-', ['CDC']),
-    ]:
+    ]
+
+def _init_dispatches():
+    dispatch = [[] for i in range(161)]
+    for chars, names in DISPATCH_STRS:
         for char in chars:
             dispatch[ord(char)].extend(names)
     for char in ':;{}()[]':
@@ -138,7 +103,6 @@ def _init_dispatches():
         for names in dispatch
     )
 
-_init_macros()
 _init_token_regexp()
 _init_dispatches()
 
@@ -150,16 +114,16 @@ def _unicode_replace(match, int=int, unichr=chr, maxunicode=sys.maxunicode):
         return '\N{REPLACEMENT CHARACTER}'  # U+FFFD
 
 UNICODE_UNESCAPE = functools.partial(
-    re.compile(COMPILED_MACROS['unicode'], re.I).sub,
+    re.compile(macro.COMPILED_MACROS['unicode'], re.I).sub,
     _unicode_replace)
 
 NEWLINE_UNESCAPE = functools.partial(
-    re.compile(r'()\\' + COMPILED_MACROS['nl']).sub,
+    re.compile(r'()\\' + macro.COMPILED_MACROS['nl']).sub,
     '')
 
 SIMPLE_UNESCAPE = functools.partial(
-    re.compile(r'\\(%s)' % COMPILED_MACROS['simple_escape'], re.I).sub,
+    re.compile(r'\\(%s)' % macro.COMPILED_MACROS['simple_escape'], re.I).sub,
     # Same as r'\1', but faster on CPython
     operator.methodcaller('group', 1))
 
-FIND_NEWLINES = re.compile(COMPILED_MACROS['nl']).finditer
+FIND_NEWLINES = re.compile(macro.COMPILED_MACROS['nl']).finditer

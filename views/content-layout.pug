@@ -22,8 +22,6 @@ block append header
     script(src="/javascripts/fontawesome-all.min.js")
     script(src="/javascripts/modal.js")
 
-  link(rel="stylesheet" type="text/css" href="/stylesheets/shared.css")
-  link(rel="stylesheet" type="text/css" href="/stylesheets/hljs.css")
 
   block styles
     each style in privateStyles
@@ -34,11 +32,9 @@ block append header
 block content
   input(type="hidden" id="ids" value=ids)
 
-  block buttons
-
   div(id="entries")
     div(class="row pd-content")
-        h1(class="pd-title col-12 text-center")
+        h1(class="pd-title col-12")
 
 
 block append nav 

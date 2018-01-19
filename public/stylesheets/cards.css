@@ -1,0 +1,14 @@
+.card,
+.card-header,
+.card-footer {
+  background: none;
+  border: 0;
+}
+
+.card {
+  border: 1px solid #FFFFFF;
+}
+
+.card a.card-link {
+  color: white;
+}

@@ -1,63 +1,14 @@
-.view,
-.button_example h4 {
-  margin-top: 10px;
-}
-
-body {
-  color: white;
-}
-
-
-.desc {
-  color:#444444;
-}
-
-.root {
-  padding: 1.5rem;
-  margin-right: 0;
-  margin-bottom: 0;
-  margin-left: 0;
-  border-width: .2rem;
-}
-
-.pd-content .desc {
-  color: black;
-}
-
-.pre {
-  background: rgba(255, 255, 255, 0);
-  border-radius:4px;
-}
-
-code.hljs {
-  background: rgba(255,255,255,0.6);
-  padding: 12px;
-  border-radius: 4px;
-}
-
-code.hljs:hover {
-  background: rgba(255,255,255,1);
-  padding: 12px;
-  border-radius: 4px;
-}
-
-body,
-.bg-default-dark {
-  background: #29143e;
-  /* Old browsers */
-  background: -moz-linear-gradient(top, #29143e 0%, #293040 100%);
-  /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #29143e 0%, #293040 100%);
-  /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #29143e 0%, #293040 100%);
-  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29143e', endColorstr='#293040', GradientType=0);
-  /* IE6-9 */
+.bg-body-default {
+    background: #29143e; /* Old browsers */
+  background: -moz-linear-gradient(top, #29143e 0%, #293040 100%);/* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #29143e 0%, #293040 100%);/* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #29143e 0%, #293040 100%);/* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#29143e', endColorstr='#293040', GradientType=0); /* IE6-9 */
   background-attachment: fixed;
   transition: background 5s ease;
 }
 
-.bg-match-critical-dark{
+.bg-body-critical {
   background: #360F28; /* Old browsers */
   background: -moz-linear-gradient(top, #360F28 0%, #293040 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #360F28 0%,#293040 100%); /* Chrome10-25,Safari5.1-6 */
@@ -66,15 +17,17 @@ body,
   background-attachment: fixed;
   transition: background 0.5s ease;
 }
-.bg-match-essential-dark{
+
+.bg-body-essential {
   background: #411B04; /* Old browsers */
   background: -moz-linear-gradient(top, #411B04 0%, #293040 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #411B04 0%,#293040 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(to bottom, #411B04 0%,#293040 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#411B04', endColorstr='#293040',GradientType=0 ); /* IE6-9 */
-  background-attachment: fixed;
+  background-attachment: fixed
 }
-.bg-match-important-dark{
+
+.bg-body-important {
   background: #0D1F0F; /* Old browsers */
   background: -moz-linear-gradient(top, #0D1F0F 0%, #293040 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #0D1F0F 0%,#293040 100%); /* Chrome10-25,Safari5.1-6 */
@@ -82,7 +35,8 @@ body,
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0D1F0F', endColorstr='#293040',GradientType=0 ); /* IE6-9 */
   background-attachment: fixed;
 }
-.bg-match-helpful-dark{
+
+.bg-body-helpful {
   background: #082633; /* Old browsers */
   background: -moz-linear-gradient(top, #082633 0%, #293040 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #082633 0%,#293040 100%); /* Chrome10-25,Safari5.1-6 */
@@ -90,7 +44,8 @@ body,
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#082633', endColorstr='#293040',GradientType=0 ); /* IE6-9 */
   background-attachment: fixed;
 }
-.bg-match-useful-dark{
+
+.bg-body-useful {
   background: #031F3C; /* Old browsers */
   background: -moz-linear-gradient(top, #031F3C 0%, #293040 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #031F3C 0%,#293040 100%); /* Chrome10-25,Safari5.1-6 */
@@ -98,22 +53,3 @@ body,
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#031F3C', endColorstr='#293040',GradientType=0 ); /* IE6-9 */
   background-attachment: fixed;
 }
-
-.bg {
-  border-radius: 8px;
-}
-
-.add {
-  position: fixed;
-  right: 1%;
-  bottom: 1%;
-  z-index:9999;
-}
-
-.example-header {
-  color: white;
-  text-transform: uppercase;
-  padding-bottom: 1em;
-  border-bottom: 1px solid white;
-}
-

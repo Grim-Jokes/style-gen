@@ -3,49 +3,6 @@ extends content-layout
 block append content
   a(
       href="/add/" + folderName
-      class="btn btn-outline-secondary add"
-    ) New Entry
-
-block append buttons 
-  a(
-    href="#"
-    role="button"
-    data-value="default-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change to bg
-  a(
-    href="#"
-    role="button"
-    data-value="critical-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change bg to critical-dark
-  a(
-    href="#"
-    role="button"
-    data-value="essential-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change bg to essential-dark
-   a(
-    href="#"
-    role="button"
-    data-value="important-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change bg to important-dark
-  a(
-    href="#"
-    role="button"
-    data-value="helpful-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change bg to helpful-dark
-  a(
-    href="#"
-    role="button"
-    data-value="useful-dark"
-    onClick="changeBg(this)"
-    class="btn btn-sm btn-link"
-  ) Change bg to useful-dark
+      class="btn btn-primary add"
+    )
+      i(class="far fa-plus")

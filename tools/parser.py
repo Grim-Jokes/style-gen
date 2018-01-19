@@ -19,7 +19,9 @@ class Parser:
           count += 1
           token = self.tokens[count]
           if token.type == data.TYPES.HASH:
-            colours.append(token.value)
+            colours.append(
+              f'{token.fileName}: {token.line}: {token.column}: {token.value}'
+            )
           elif token.type == data.TYPES.FUNCTION:
             rgb_color = token.value
             codes = []
@@ -31,17 +33,19 @@ class Parser:
             for i in range(max_):
                 count += 1
                 token = self.tokens[count]
-                codes.append(token.value)
+                codes.append(str(token.value))
 
             rgb_color += ','.join(codes) + ')'
 
             try:
               if self.tokens[count + 1] == 'important':
-                rgb_color += '!important'
+                rgb_color += ' !important'
             except IndexError:
               pass
 
-            colours.append(rgb_color)
+            colours.append(
+              f'{token.fileName}: {token.line}: {token.column}: {rgb_color}'
+            )
 
       count += 1
   
